@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'papermc'
+        url 'https://repo.papermc.io/repository/maven-public/'
+    }
+    maven { url "https://storehouse.okaeri.eu/repository/maven-public/" }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:3.1.2-SNAPSHOT'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.0.1'
+    implementation 'eu.okaeri:okaeri-configs-yaml-snakeyaml:4.0.6'
+    implementation 'org.mongodb:mongodb-driver-sync:4.4.1'
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release.set(17)
+}
+
+shadowJar {
+    archiveFileName = "blazestar-velocity-skins.jar"
+}
